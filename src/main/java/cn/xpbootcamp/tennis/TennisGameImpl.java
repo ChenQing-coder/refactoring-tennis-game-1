@@ -37,9 +37,7 @@ public class TennisGameImpl implements TennisGame {
         return getScoreState(player1Score) + "-" + getScoreState(player2Score);
     }
 
-    public String getScoreState(int score) {
-        return Arrays.asList("Love", "Fifteen", "Thirty", "Forty").get(score);
-    }
+
 
     private String getScoreWhenMoreThanFour() {
         int minusResult = player1Score - player2Score;
