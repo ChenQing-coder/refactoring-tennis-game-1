@@ -16,6 +16,6 @@ public class WinScore extends AbstractScore {
 
     @Override
     public String state() {
-        return player1.isWin(player2.getScore()) ? "Win for  " + player1.getName() : "Win for  " + player2.getName();
+        return player1.isWin(player2.getScore()) ? "Win for " + player1.getName() : "Win for " + player2.getName();
     }
 }
