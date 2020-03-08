@@ -1,6 +1,8 @@
 
 package cn.xpbootcamp.tennis;
 
+import java.util.Arrays;
+
 public class TennisGameImpl implements TennisGame {
 
     private int player1Score = 0;
@@ -32,64 +34,25 @@ public class TennisGameImpl implements TennisGame {
     }
 
     private String getScoreRegular() {
-        int tempScore;
-        String score = "";
-        for (int i = 1; i < 3; i++) {
-            if (i == 1) tempScore = player1Score;
-            else {
-                score += "-";
-                tempScore = player2Score;
-            }
-            switch (tempScore) {
-                case 0:
-                    score += "Love";
-                    break;
-                case 1:
-                    score += "Fifteen";
-                    break;
-                case 2:
-                    score += "Thirty";
-                    break;
-                case 3:
-                    score += "Forty";
-                    break;
-            }
-        }
-        return score;
+        return getScoreState(player1Score) + "-" + getScoreState(player2Score);
+    }
+
+    public String getScoreState(int score) {
+        return Arrays.asList("Love", "Fifteen", "Thirty", "Forty").get(score);
     }
 
     private String getScoreWhenMoreThanFour() {
-        String score;
         int minusResult = player1Score - player2Score;
-        if (minusResult == 1) {
-            score = "Advantage player1";
-        } else if (minusResult == -1) {
-            score = "Advantage player2";
-        } else if (minusResult >= 2) {
-            score = "Win for player1";
-        } else {
-            score = "Win for player2";
-        }
-        return score;
+        String winner = minusResult > 0 ? player1Name : player2Name;
+        return Math.abs(minusResult) == 1 ? "Advantage " + winner : "Win for " + winner;
+
     }
 
     private String getScoreWhenEqual() {
-        String score;
-        switch (player1Score) {
-            case 0:
-                score = "Love-All";
-                break;
-            case 1:
-                score = "Fifteen-All";
-                break;
-            case 2:
-                score = "Thirty-All";
-                break;
-            default:
-                score = "Deuce";
-                break;
-
+        if (player1Score > 2) {
+            return "Deuce";
+        } else {
+            return getScoreState(player1Score) + "-All";
         }
-        return score;
     }
 }
