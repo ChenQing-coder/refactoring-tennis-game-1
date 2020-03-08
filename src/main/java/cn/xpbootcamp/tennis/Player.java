@@ -15,4 +15,16 @@ public class Player {
     public int getScore() {
         return score;
     }
+
+    public boolean isEqual(int anotherScore) {
+        return score == anotherScore;
+    }
+
+    public boolean isAdvantage(int anotherScore) {
+        return score >= 4 || score - anotherScore == 1;
+    }
+
+    public boolean isWin(int anotherScore) {
+        return score >= 4 || score - anotherScore >= 2;
+    }
 }
